@@ -18,3 +18,9 @@ class HelpAction(argparse.Action):
                     parser.exit()
                     
         parser.error("Unknown command '{0}'".format(values))
+
+def getParser():
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("-h", "--help", help="Shows this help message or command help and exit", nargs="?", const="", default="", action=HelpAction, metavar="CMD")
+    subparsers = parser.add_subparsers(help="Commands", dest="cmd")
+    return (parser, subparsers)

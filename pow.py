@@ -2,10 +2,16 @@ import argparse
 from src import target
 from src import verify
 from src import solve
-from src import actions
+from src import parserhelper
 
 def main():
-    parser = getParser()
+    # Setup the parser
+    parser, subparsers = parserhelper.getParser()
+    target.setup(subparsers)
+    solve.setup(subparsers)
+    verify.setup(subparsers)
+
+    # Parse the args and run the desired commands   
     args = parser.parse_args()
 
     if (args.cmd == target.COMMAND):
@@ -16,15 +22,6 @@ def main():
         verify.run(args, parser)
     else:
         parser.print_help()
-
-def getParser():
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument("-h", "--help", help="Shows this help message or command help and exit", nargs="?", const="", default="", action=actions.HelpAction, metavar="CMD")
-    subparsers = parser.add_subparsers(help="Commands", dest="cmd")
-    target.setup(subparsers)
-    solution.setup(subparsers)
-    verify.setup(subparsers)
-    return parser
 
 if __name__ == "__main__":
     main()
