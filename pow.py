@@ -14,14 +14,10 @@ def main():
     # Parse the args and run the desired commands   
     args = parser.parse_args()
 
-    if (args.cmd == target.COMMAND):
-        target.run(args, parser)
-    elif (args.cmd == solve.COMMAND):
-        solve.run(args, parser)
-    elif (args.cmd == verify.COMMAND):
-        verify.run(args, parser)
-    else:
-        parser.print_help()
+    if (args.cmd == target.COMMAND): target.run(args, parser)
+    elif (args.cmd == solve.COMMAND): solve.run(args, parser)
+    elif (args.cmd == verify.COMMAND): verify.run(args, parser)
+    else: parser.print_help()
 
 if __name__ == "__main__":
     main()
